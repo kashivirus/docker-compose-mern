@@ -11,7 +11,7 @@ services:
     environment:
       - WATCHPACK_POLLING=true
     networks:
-      - mern-stack-networks
+      - mern-stack-network
     volumes:
       - ./react-docker:/app
     depends_on:
@@ -26,7 +26,7 @@ services:
     container_name: express_container
 
     networks:
-      - mern-stack-networks
+      - mern-stack-network
     volumes:
       - ./express-docker:/app
 
@@ -39,7 +39,7 @@ services:
       - 27017:21017
     container_name: mongo-contaiener
     networks:
-      - mern-stack-networks
+      - mern-stack-network
     volumes:
       - mongoData:/data/db
     environment:
@@ -48,7 +48,7 @@ services:
       - MONGO_INIT_DATABASE=ecom
 
 networks:
-  mern-stack-networks:
+  mern-stack-network:
 
 volumes:
   mongoData:
