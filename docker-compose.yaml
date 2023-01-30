@@ -1,13 +1,12 @@
 version: "3"
-
 services:
   front:
     build:
       context: "./react-docker"
-      dockerfile: Dockerfile'
+      dockerfile: Dockerfile
     ports:
       - 3000:3000
-    container_name: react_container
+    container_name: react-container
     environment:
       - WATCHPACK_POLLING=true
     networks:
@@ -16,39 +15,33 @@ services:
       - ./react-docker:/app
     depends_on:
       - backend
-
   backend:
     build:
       context: "./express-docker"
       dockerfile: Dockerfile
     ports:
       - 5500:5500
-    container_name: express_container
-
+    container_name: express-container
     networks:
       - mern-stack-network
     volumes:
       - ./express-docker:/app
-
     depends_on:
       - mongo
-
   mongo:
     image: mongo
     ports:
-      - 27017:21017
-    container_name: mongo-contaiener
+      - 27017:27017
+    container_name: mongo-container
     networks:
       - mern-stack-network
     volumes:
       - mongoData:/data/db
     environment:
-      - MONGO_INIT_ROOT_USERNAME=root
-      - MONGO_INIT_ROOT_PASSWORD=secret
-      - MONGO_INIT_DATABASE=ecom
-
+      - MONGO_INITDB_ROOT_USERNAME=<use .env file instead>
+      - MONGO_INITDB_ROOT_PASSWORD=<use .env file instead>
+      - MONGO_INITDB_DATABASE=ecom
 networks:
   mern-stack-network:
-
 volumes:
   mongoData:
